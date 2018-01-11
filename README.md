@@ -1,4 +1,4 @@
-#本demo是创建kafka的topic，并且产生何消费消息
+# 本demo是创建kafka的topic，并且产生何消费消息
 
 # 在本地安装kafka
 下载 kafka_2.11-1.0.0
