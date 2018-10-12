@@ -20,17 +20,19 @@ public class MessageProducer {
         props.put("batch.size", 16384);
         props.put("linger.ms", 1);
         props.put("buffer.memory", 33554432);
+        props.put("partitioner.class", TestPartitioner.class);
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         Producer<String, String> producer = new KafkaProducer<String, String>(props);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            producer.send(new ProducerRecord<String, String>(Constants.topic, Integer.toString(i), "msg" + Integer.toString(i)));
+//            producer.send(new ProducerRecord<String, String>(Constants.topic, Integer.toString(i), "msg"));
+            producer.send(new ProducerRecord<String, String>(Constants.topic,  "bbb","msg" + Integer.toString(i)));
         }
         producer.close();
     }
