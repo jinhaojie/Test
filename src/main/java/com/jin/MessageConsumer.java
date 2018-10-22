@@ -29,9 +29,11 @@ public class MessageConsumer {
         consumer.subscribe(Arrays.asList(Constants.topic),new ConsumerRebalanceListener() {
             @Override
             public void onPartitionsRevoked(Collection<TopicPartition> collection) {
+                //此方法会在消费者停止消费消费后，在重平衡开始前调用。
             }
             @Override
             public void onPartitionsAssigned(Collection<TopicPartition> collection) {
+//                此方法在分区分配给消费者后，在消费者开始读取消息前调用。
                 //将偏移设置到最开始
                 consumer.seekToBeginning(collection);
             }

@@ -14,13 +14,13 @@ import java.util.Properties;
 public class MessageProducer {
     public static void main(String[] args){
         Properties props = new Properties();
-        props.put("bootstrap.servers", Constants.address);
+        props.put("bootstrap.servers", "118.25.42.12:9092;118.25.42.12:9093");
+        props.put("partitioner.class", TestPartitioner.class);
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);
         props.put("linger.ms", 1);
         props.put("buffer.memory", 33554432);
-        props.put("partitioner.class", TestPartitioner.class);
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
@@ -31,8 +31,7 @@ public class MessageProducer {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            producer.send(new ProducerRecord<String, String>(Constants.topic, Integer.toString(i), "msg"));
-            producer.send(new ProducerRecord<String, String>(Constants.topic,  "bbb","msg" + Integer.toString(i)));
+            producer.send(new ProducerRecord<String, String>("t1",  null,"msg" + Integer.toString(i)));
         }
         producer.close();
     }

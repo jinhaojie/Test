@@ -18,14 +18,16 @@ public class CreateTopic {
     public static void main(String[] args) {
         //创建topic
         Properties props = new Properties();
-        props.put("bootstrap.servers", Constants.address);
+        // kafka broker地址
+        props.put("bootstrap.servers", "118.25.42.12:9092;118.25.42.12:9093");
         AdminClient adminClient = AdminClient.create(props);
         ArrayList<NewTopic> topics = new ArrayList<NewTopic>();
-        NewTopic newTopic = new NewTopic(Constants.topic, 1, (short) 1);
+        // 第三个参数副本个数必须小于等于broker实例个数
+        NewTopic newTopic = new NewTopic("topic2", 2, (short) 2);
         topics.add(newTopic);
         CreateTopicsResult result = adminClient.createTopics(topics);
         try {
-            result.all().get();
+            System.out.println(result.all().get());
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }

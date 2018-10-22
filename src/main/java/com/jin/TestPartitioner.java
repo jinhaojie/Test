@@ -7,7 +7,12 @@ import java.util.Map;
 
 public class TestPartitioner implements Partitioner{
     @Override
-    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+    public int partition(String topic,
+                         Object key,
+                         byte[] keyBytes,
+                         Object value,
+                         byte[] valueBytes,
+                         Cluster cluster) {
         if (key.toString().equals("aaa"))
             return 0;
         else if (key.toString().equals("bbb"))
